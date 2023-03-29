@@ -1,0 +1,17 @@
+CREATE DATABASE PoliceRecords;
+
+USE PoliceRecords;
+
+
+CREATE TABLE Crime(
+crime_id auto_increment PRIMARY KEY,
+type varchar(10),
+description varchar(50),
+ps_area varchar(15),
+date date NOT NULL,
+name_of_victim varchar(20)
+);
+
+
+date and place of the crime that
+can’t be null.
