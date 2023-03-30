@@ -4,14 +4,46 @@ USE PoliceRecords;
 
 
 CREATE TABLE Crime(
-crime_id auto_increment PRIMARY KEY,
-type varchar(10),
-description varchar(50),
-ps_area varchar(15),
-date date NOT NULL,
-name_of_victim varchar(20)
+crime_id INT AUTO_INCREMENT PRIMARY KEY,
+type VARCHAR(10),
+description VARCHAR(50),
+ps_area VARCHAR(15) NOT NULL,
+cr_date date NOT NULL,
+name_of_victim VARCHAR(20)
 );
 
 
-date and place of the crime that
-can’t be null.
+CREATE TABLE Criminal(
+criminal_id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(20) NOT NULL,
+dob date,
+gender VARCHAR(6) NOT NULL,
+identifying_mark VARCHAR(30) NOT NULL,
+first_arrest_date date,
+arrested_from_ps_area VARCHAR(15)
+);
+
+CREATE TABLE Crime_Criminal_Records(
+crime_id int,
+criminal_id int,
+FOREIGN KEY(crime_id) REFERENCES Crime(crime_id) ON DELETE CASCADE,
+FOREIGN KEY(criminal_id) REFERENCES Criminal(criminal_id) ON DELETE CASCADE
+);
+
+INSERT INTO Crime (type, description, ps_area, cr_date, name_of_victim)
+ VALUES('Robbery', 'at night', 'panvel', '2021-01-01', 'Vinod');
+        
+INSERT INTO Criminal(name, dob, gender, identifying_mark, first_arrest_date, arrested_from_ps_area)
+ VALUES ('Shinde', '2021-05-05', 'Male', 'Mole on right hand', '2018-04-04', 'Thane');           
+        
+INSERT INTO Crime_Criminal_Records VALUES(1,1);        
+        
+SELECT * FROM (Crime INNER JOIN Crime_Criminal_Records
+ON Crime.crime_id = Crime_Criminal_Records.crime_id 
+INNER JOIN Criminal ON Crime_Criminal_Records.criminal_id = Criminal.criminal_id);        
+        
+
+
+        
+        
+        
