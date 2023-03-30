@@ -43,7 +43,7 @@ public class UIMain {
 		}
 		else if (choice == 3) {
 			System.out.println("Thank you ! Visit again");
-			System.exit(0);
+			//System.exit(0);
 		}
 		else {
 			System.out.println("Please choose a number from below options");
