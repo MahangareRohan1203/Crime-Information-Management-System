@@ -36,10 +36,12 @@ public class UIMain {
 		if (choice == 1) {
 			System.out.println("Welcome Admin ! Please Login to your account");
 			AdminLogin(sc);
+			AdminOrCitizen(sc);
 		}
 		else if (choice == 2) {
 			System.out.println("Welcome Citizen !");
 			citizenLogin(sc);
+			AdminOrCitizen(sc);
 		}
 		else if (choice == 3) {
 			System.out.println("Thank you ! Visit again");

@@ -41,6 +41,11 @@ INSERT INTO Crime_Criminal_Records VALUES(1,1);
 SELECT * FROM (Crime INNER JOIN Crime_Criminal_Records
 ON Crime.crime_id = Crime_Criminal_Records.crime_id 
 INNER JOIN Criminal ON Crime_Criminal_Records.criminal_id = Criminal.criminal_id);        
+
+SELECT COUNT(*), ps_area FROM Crime where cr_date BETWEEN '2020-01-01' AND '2023-12-31' GROUP BY ps_area ;
+
+
+
         
 
 
