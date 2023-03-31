@@ -2,9 +2,12 @@ package com.police.UI;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import com.police.DAO.Cr_Criminal_DAO;
+import com.police.DAO.Cr_Criminal_DAOImpl;
 import com.police.DAO.CrimeDAO;
 import com.police.DAO.CrimeDAOImpl;
 import com.police.DAO.CriminalDAO;
@@ -13,6 +16,7 @@ import com.police.DTO.CrimeDTO;
 import com.police.DTO.CrimeDTOImpl;
 import com.police.DTO.CriminalDTO;
 import com.police.DTO.CriminalDTOImpl;
+import com.police.exceptions.SomethingWentWrong;
 
 public class AdminUI {
 	public static void AdminLogin(Scanner sc) {
@@ -45,7 +49,7 @@ public class AdminUI {
 		try {
 			choice = sc.nextInt();
 			if (choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5 && choice != 6 && choice != 7
-					&& choice != 8 && choice != 9) {
+					&& choice != 8 && choice != 9 && choice != 10 && choice != 11) {
 				System.out.println("Please choose a number from below options");
 				adminMethods(sc);
 			} else
@@ -78,7 +82,7 @@ public class AdminUI {
 		}
 			break;
 		case 5: {
-			ACrimiToCr();
+			ACrimiToCr(sc);
 		}
 			break;
 		case 6: {
@@ -97,6 +101,15 @@ public class AdminUI {
 			System.out.println("Thank you ! Visit again");
 			// System.exit(0);
 		}
+		break;
+		case 10:{
+			ShowAllCrimes();
+		}
+		break;
+		case 11:{
+			ShowAllCriminals();
+		}
+		break;
 		}
 	}
 
@@ -250,28 +263,152 @@ public class AdminUI {
 		}
 	}
 
-	// ============================ ASSIGN CRIMINALS TO CRIME
-	// ================================
-	static void ACrimiToCr() {
-
+	// ============================ ASSIGN CRIMINALS TO CRIME  ================================
+	static void ACrimiToCr(Scanner sc) {
+		try {
+			System.out.println("Enter a Crime Id: ");
+			int cr_id = sc.nextInt();
+			
+			System.out.println("Enter a Criminal Id: ");
+			int criminal_id = sc.nextInt();
+			
+			Cr_Criminal_DAO cdo = new Cr_Criminal_DAOImpl();
+			
+			cdo.AssignCriminal(cr_id, criminal_id);
+			System.out.println("Criminal Assigned to crime Successfully. ");
+			
+		}catch(InputMismatchException x) {
+			x.printStackTrace();
+		}catch(SomethingWentWrong | SQLException x) {
+			x.printStackTrace();
+		}
+		
 	}
 
-	// ============================ REMOVE CRIMINALS
-	// =========================================
+	// ============================ REMOVE CRIMINALS FROM CRIME =========================================
 	static void RemoveCriminals(Scanner sc) {
-
+		try {
+			System.out.println("Enter a Crime Id: ");
+			int cr_id = sc.nextInt();
+			
+			System.out.println("Enter a Criminal Id: ");
+			int criminal_id = sc.nextInt();
+			
+			Cr_Criminal_DAO cdo = new Cr_Criminal_DAOImpl();
+			
+			cdo.DeleteCrCriminal(cr_id, criminal_id);
+			System.out.println("Criminal is removed from Crime Successfully. ");
+			
+		}catch(InputMismatchException x) {
+			x.printStackTrace();
+		}catch( SQLException x) {
+			x.printStackTrace();
+		}
 	}
 
-	// ============================= DELETE PARTICULAR CRIME
-	// ===================================
+	// ============================= DELETE PARTICULAR CRIME  ===================================
 	static void DeleteCrime(Scanner sc) {
+		try {
+			
+			System.out.println("Enter a Crime Id: ");
+			int cr_id = sc.nextInt();
 
+			CrimeDTO crd = new CrimeDTOImpl(cr_id, null, null, null, null, null);
+
+			CrimeDAO cdo = new CrimeDAOImpl();
+			cdo.RemoveCrime(crd);
+
+			System.out.println("Crime Details Removed Successfully. ");
+			// System.out.println(type+" "+description+" "+ps_area+ " "+date+" "+victim);
+		} catch (InputMismatchException e) {
+			e.printStackTrace();
+		} catch (SQLException X) {
+			X.printStackTrace();
+		}
 	}
 
-	// ============================== DELETE PARTICULAR CRIMINAL
-	// ================================
+	// ============================== DELETE PARTICULAR CRIMINAL  ================================
 	static void DeleteCriminal(Scanner sc) {
+		try {
+			
+			System.out.println("Enter a Criminal Id: ");
+			int criminal_id = sc.nextInt();
 
+
+			CriminalDTO crd = new CriminalDTOImpl(criminal_id, null, null, null, null, null, null);
+
+			CriminalDAO cdo = new CriminalDAOImpl();
+
+			cdo.DeleteCriminal(crd);
+			System.out.println("Criminal Details Deleted Successfully. ");
+
+		} catch (InputMismatchException e) {
+			e.printStackTrace();
+		} catch (SQLException X) {
+			X.printStackTrace();
+		}
+	}
+	
+	//=========================== SHOW ALL CRIMES ========================================
+	static void ShowAllCrimes() {
+		
+		CrimeDAO cdo = new CrimeDAOImpl();
+
+		ArrayList<CrimeDTO> list = new ArrayList<>();
+		try {
+			list = cdo.SACrimes();
+			list.stream().forEach(a -> {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				System.out.println("-----------------------------------------------------");
+				System.out.println("Crime Id : "+a.getCrime_id());
+				System.out.println("Type: "+a.getType());
+				System.out.println("Description: "+a.getDescription());
+				System.out.println("Police Station area: "+a.getPs_area());
+				System.out.println("Date of Crime: "+a.getDate());
+				System.out.println("Victim of Crime: "+a.getVictim());
+				System.out.println();
+			});
+			System.out.println("================================================================");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong");
+		}
+	}
+	
+	//=================== SHOW ALL CRIMINALS =========================================
+	static void ShowAllCriminals() {
+		
+		CriminalDAO cdo = new CriminalDAOImpl();
+
+		ArrayList<CriminalDTO> list = new ArrayList<>();
+		try {
+			list = cdo.SACriminals();
+			list.stream().forEach(a -> {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				//criminal_id | name          | dob        | gender | identifying_mark   | first_arrest_date | arrested_from_ps_area 
+				System.out.println("-----------------------------------------------------");
+				System.out.println("Criminal Id : "+a.getCriminal_id());
+				System.out.println("Name: "+a.getName());
+				System.out.println("DOB: "+a.getDob());
+				System.out.println("Gender: "+a.getGender());
+				System.out.println("Identification Mark is:  "+a.getIdentify_mark());
+				System.out.println("First arrest Date is: "+a.getFa_date());
+				System.out.println("Arrested from Police Station Area: "+a.getPs_area());
+				System.out.println();
+			});
+			System.out.println("================================================================");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong");
+		}
 	}
 
 }

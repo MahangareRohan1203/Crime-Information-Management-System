@@ -1,7 +1,15 @@
 package com.police.UI;
 
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import com.police.DAO.CrimeDAO;
+import com.police.DAO.CrimeDAOImpl;
+import com.police.DTO.CrimeDTO;
+import com.police.DTO.CrimeStationDTO;
 
 public class CitizenUI {
 	static void citizenMethods(Scanner sc) {
@@ -39,6 +47,7 @@ catch (InputMismatchException e) {
 		switch(choice) {
 		case 1 : {
 			viewCrimeByStation(sc);
+			citizenMethods(sc);
 		}
 		break;
 		case 2 : {
@@ -66,6 +75,33 @@ catch (InputMismatchException e) {
 	
 	//========= TOTAL CRIME FOR EACH POLICE STATION AREA FOR DATE RANGE  =================
 	static void viewCrimeByStation(Scanner sc) {
+//		sc.nextLine();
+//		System.out.println("Enter a Police Station Name: ");
+//		String ps_name = sc.nextLine();
+		
+		System.out.println("Enter a Start Date: ");
+		LocalDate sd = LocalDate.parse(sc.next());
+		
+		System.out.println("Enter a Last Date: ");
+		LocalDate ed = LocalDate.parse(sc.next());
+		
+		CrimeDAO cdo = new CrimeDAOImpl();
+		
+		ArrayList<CrimeStationDTO> list = new ArrayList<>();
+		try {
+			list = cdo.viewCrByDRange(sd, ed);
+			System.out.println("============================================================");
+			System.out.println();
+			list.stream().forEach(a ->{
+				System.out.println("Police Station Name: "+a.getP_station()+" ="+a.getCount());
+			});
+			System.out.println();
+			System.out.println("=============================================================");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Something went wrong");
+		}
 		
 	}
 	
