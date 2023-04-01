@@ -2,6 +2,7 @@ package com.police.UI;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -140,10 +141,12 @@ public class AdminUI {
 
 			System.out.println("Crime Details Added Successfully. ");
 			// System.out.println(type+" "+description+" "+ps_area+ " "+date+" "+victim);
-		} catch (InputMismatchException e) {
-			e.printStackTrace();
+		} catch (InputMismatchException | DateTimeParseException e) {
+			//e.printStackTrace();
+			System.out.println("Please Enter right information.");
 		} catch (SQLException X) {
-			X.printStackTrace();
+			//X.printStackTrace();
+			System.out.println("Something Went Wrong. ");
 		}
 	}
 
