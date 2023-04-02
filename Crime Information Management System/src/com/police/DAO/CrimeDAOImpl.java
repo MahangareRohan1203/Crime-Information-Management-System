@@ -95,7 +95,7 @@ public class CrimeDAOImpl implements CrimeDAO {
 				while(rs.next()) {
 					list.add(new CrimeStationDTOImpl(rs.getInt(1), rs.getString(2)));
 				}
-			}
+			}else System.out.println("No reocrd Found");
 			//ADD HERE EMPTY RESULT EXCEPTION
 			DBUtil.closeConnection(cn);
 		} catch (SQLException x) {
@@ -124,7 +124,7 @@ public class CrimeDAOImpl implements CrimeDAO {
 				}
 			}else {
 				//THROW EXCEPTION HERE RESULT IS EMPLTY
-				System.out.println("empty");
+				System.out.println("No record Found. ");
 			}
 			DBUtil.closeConnection(cn);
 		} catch (SQLException x) {

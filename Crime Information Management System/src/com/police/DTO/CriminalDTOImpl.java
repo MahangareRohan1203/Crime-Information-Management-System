@@ -3,8 +3,7 @@ package com.police.DTO;
 import java.time.LocalDate;
 
 public class CriminalDTOImpl implements CriminalDTO {
-	// System.out.println(name+" "+dob+" "+gender+" "+identify_mark+" "+fa_date+"
-	// "+ps_area);
+
 	private int criminal_id;
 	private String name;
 	private LocalDate dob;
@@ -33,11 +32,6 @@ public class CriminalDTOImpl implements CriminalDTO {
 	public int getCriminal_id() {
 		return criminal_id;
 	}
-
-//	@Override
-//	public void setCriminal_id(String criminal_id) {
-//		this.criminal_id = criminal_id;
-//	}
 
 	@Override
 	public String getName() {

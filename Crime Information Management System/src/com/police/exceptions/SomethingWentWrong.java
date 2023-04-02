@@ -3,7 +3,7 @@ package com.police.exceptions;
 public class SomethingWentWrong extends Exception {
 
 
-	public SomethingWentWrong(SomethingWentWrong x) {
+	public SomethingWentWrong(String x) {
 		// TODO Auto-generated constructor stub
 		super(x);
 	}
