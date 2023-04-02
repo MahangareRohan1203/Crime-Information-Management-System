@@ -6,8 +6,6 @@ public interface CriminalDTO {
 
 	public int getCriminal_id();
 
-	//public void setCriminal_id(String criminal_id);
-
 	public String getName();
 
 	public void setName(String name);

@@ -19,7 +19,7 @@ public class CitizenUI {
 	static void citizenMethods(Scanner sc) {
 		System.out.println(
 				   "+---------------------------------------------------------------------------------------+" + "\n"
-				 + "| Welcome Citizen ! Choose Any option from below                                        |" + "\n"
+				 + "|  Choose Any option from below                                                         |" + "\n"
 				 + "| 1. View Total Crime for Each Police Station By Date Range                             |" + "\n"
 				 + "| 2. View Total Crime for Each Crime Type By Date Range                                 |" + "\n"
 				 + "| 3. Search Criminal By Name                                                            |" + "\n"
@@ -134,7 +134,6 @@ catch (InputMismatchException e) {
 			System.out.println("=============================================================");
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
 			System.out.println("Something went wrong");
 		}
 	}
@@ -168,7 +167,7 @@ catch (InputMismatchException e) {
 			});
 			System.out.println("================================================================");
 		}catch(SQLException e) {
-			e.printStackTrace();
+			System.out.println("Something went wrong. ");
 			
 		}
 	}
@@ -200,8 +199,8 @@ catch (InputMismatchException e) {
 			});
 			System.out.println("================================================================");
 		}catch(SQLException e) {
-			e.printStackTrace();
+			System.out.println("Something went wrong ");
 			
-		}
+		} 
 	}
 }

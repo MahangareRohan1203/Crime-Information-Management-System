@@ -32,7 +32,7 @@ public class AdminUI {
 			System.out.println("Login Successful.....");
 			adminMethods(sc);
 		} else {
-			System.out.println("Invalid Credentias");
+			System.out.println("Invalid Credentials");
 			AdminLogin(sc);
 		}
 	}
@@ -68,34 +68,42 @@ public class AdminUI {
 		switch (choice) {
 		case 1: {
 			AddCrime(sc);
+			adminMethods(sc);
 		}
 			break;
 		case 2: {
 			UpdateCrime(sc);
+			adminMethods(sc);
 		}
 			break;
 		case 3: {
 			AddCriminal(sc);
+			adminMethods(sc);
 		}
 			break;
 		case 4: {
 			UpdateCriminal(sc);
+			adminMethods(sc);
 		}
 			break;
 		case 5: {
 			ACrimiToCr(sc);
+			adminMethods(sc);
 		}
 			break;
 		case 6: {
 			RemoveCriminals(sc);
+			adminMethods(sc);
 		}
 			break;
 		case 7: {
 			DeleteCrime(sc);
+			adminMethods(sc);
 		}
 			break;
 		case 8: {
 			DeleteCriminal(sc);
+			adminMethods(sc);
 		}
 			break;
 		case 9: {
@@ -105,10 +113,12 @@ public class AdminUI {
 		break;
 		case 10:{
 			ShowAllCrimes();
+			adminMethods(sc);
 		}
 		break;
 		case 11:{
 			ShowAllCriminals();
+			adminMethods(sc);
 		}
 		break;
 		}
@@ -117,7 +127,7 @@ public class AdminUI {
 	// ========================= ADD CRIME DETAILS ==========================
 	static void AddCrime(Scanner sc) {
 		try {
-			System.out.println("Enter a type of e.g.Robbery, Theft, Homicide etc.");
+			System.out.println("Enter a type of Crime e.g.Robbery, Theft, Homicide etc.");
 			String type = sc.next();
 
 			sc.nextLine();
@@ -142,10 +152,9 @@ public class AdminUI {
 			System.out.println("Crime Details Added Successfully. ");
 			// System.out.println(type+" "+description+" "+ps_area+ " "+date+" "+victim);
 		} catch (InputMismatchException | DateTimeParseException e) {
-			//e.printStackTrace();
+			
 			System.out.println("Please Enter right information.");
 		} catch (SQLException X) {
-			//X.printStackTrace();
 			System.out.println("Something Went Wrong. ");
 		}
 	}
@@ -180,10 +189,10 @@ public class AdminUI {
 
 			System.out.println("Crime Details Updated Successfully. ");
 			// System.out.println(type+" "+description+" "+ps_area+ " "+date+" "+victim);
-		} catch (InputMismatchException e) {
-			e.printStackTrace();
+		} catch (InputMismatchException | DateTimeParseException e) {
+			System.out.println("Please Enter right information.");
 		} catch (SQLException X) {
-			X.printStackTrace();
+			System.out.println("Something Went Wrong. ");
 		}
 	}
 
@@ -218,10 +227,10 @@ public class AdminUI {
 			cdo.AddCriminal(crd);
 			System.out.println("Criminal Details added Successfully. ");
 
-		} catch (InputMismatchException e) {
-			e.printStackTrace();
+		} catch (InputMismatchException | DateTimeParseException e) {
+			System.out.println("Enter a valid Information ");
 		} catch (SQLException X) {
-			X.printStackTrace();
+			System.out.println("Something Went Wrong. ");
 		}
 	}
 
@@ -259,10 +268,10 @@ public class AdminUI {
 			cdo.UpdateCriminal(crd);
 			System.out.println("Criminal Details Updated Successfully. ");
 
-		} catch (InputMismatchException e) {
-			e.printStackTrace();
+		} catch (InputMismatchException | DateTimeParseException e) {
+			System.out.println("Enter a valid Information ");
 		} catch (SQLException X) {
-			X.printStackTrace();
+			System.out.println("Something Went Wrong. ");
 		}
 	}
 
@@ -281,9 +290,9 @@ public class AdminUI {
 			System.out.println("Criminal Assigned to crime Successfully. ");
 			
 		}catch(InputMismatchException x) {
-			x.printStackTrace();
+			System.out.println("Enter a valid Information ");
 		}catch(SomethingWentWrong | SQLException x) {
-			x.printStackTrace();
+			System.out.println("Something Went Wrong. ");
 		}
 		
 	}
@@ -303,9 +312,9 @@ public class AdminUI {
 			System.out.println("Criminal is removed from Crime Successfully. ");
 			
 		}catch(InputMismatchException x) {
-			x.printStackTrace();
+			System.out.println("Enter a valid Information ");
 		}catch( SQLException x) {
-			x.printStackTrace();
+			System.out.println("Something Went Wrong. ");
 		}
 	}
 
@@ -324,9 +333,9 @@ public class AdminUI {
 			System.out.println("Crime Details Removed Successfully. ");
 			// System.out.println(type+" "+description+" "+ps_area+ " "+date+" "+victim);
 		} catch (InputMismatchException e) {
-			e.printStackTrace();
+			System.out.println("Enter a valid Information ");
 		} catch (SQLException X) {
-			X.printStackTrace();
+			System.out.println("Something went wrong ");
 		}
 	}
 
@@ -346,9 +355,9 @@ public class AdminUI {
 			System.out.println("Criminal Details Deleted Successfully. ");
 
 		} catch (InputMismatchException e) {
-			e.printStackTrace();
+			System.out.println("Ener a valid Information ");
 		} catch (SQLException X) {
-			X.printStackTrace();
+			System.out.println("Something went wrong ");
 		}
 	}
 	
@@ -377,7 +386,6 @@ public class AdminUI {
 			});
 			System.out.println("================================================================");
 		} catch (SQLException e) {
-			e.printStackTrace();
 			System.out.println("Something went wrong");
 		}
 	}
@@ -409,7 +417,6 @@ public class AdminUI {
 			});
 			System.out.println("================================================================");
 		} catch (SQLException e) {
-			e.printStackTrace();
 			System.out.println("Something went wrong");
 		}
 	}
