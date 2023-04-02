@@ -14,4 +14,6 @@ public interface CriminalDAO {
 	public void DeleteCriminal(CriminalDTO cr) throws SQLException;
 	
 	ArrayList<CriminalDTO> SACriminals() throws SQLException;
+
+	ArrayList<CriminalDTO> SearchByName(String name) throws SQLException;
 }

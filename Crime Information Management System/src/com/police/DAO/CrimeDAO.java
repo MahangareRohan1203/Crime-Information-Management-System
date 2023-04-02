@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import com.police.DTO.CrimeDTO;
 import com.police.DTO.CrimeStationDTO;
+import com.police.DTO.CrimeTypeDTO;
 
 public interface CrimeDAO {
 
@@ -18,5 +19,9 @@ public interface CrimeDAO {
 	ArrayList<CrimeDTO> SACrimes() throws SQLException;
 
 	ArrayList<CrimeStationDTO> viewCrByDRange(LocalDate sd, LocalDate ed) throws SQLException;
+
+	ArrayList<CrimeTypeDTO> SACrimeByType(LocalDate sd, LocalDate ed) throws SQLException;
+
+	ArrayList<CrimeDTO> SearchByDesc(String desc) throws SQLException;
 
 }

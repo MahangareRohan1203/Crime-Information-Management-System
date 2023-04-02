@@ -1,6 +1,6 @@
 **# puny-leather-5605**
 # Crime Information Management System
-![](https://cdn.w600.comps.canstockphoto.com/police-officer-with-handcuffs-character-eps-vectors_csp70171834.jpg)
+![](./Extras/Logo.png)
 
 **Probem Statement:**  
 The main objective of this system is to maintain and manage detailed information on the
@@ -31,9 +31,10 @@ crime that happened in an area under a particular police station.
 
 # Relation of Database
 ------------------
-**ER Diagram**
+#### **ER Diagram** 
+![](./Extras/Database%20Schema.png)
 
-# Flow of Project
 ------------------
-**Flow Diagram**
-
+# Flow of Project
+#### **Flow Diagram**
+![alt](./Extras/Flow-Diagram.jpg)

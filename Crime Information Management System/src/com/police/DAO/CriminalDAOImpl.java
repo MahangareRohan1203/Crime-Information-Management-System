@@ -98,5 +98,33 @@ public class CriminalDAOImpl implements CriminalDAO {
 		}
 		return list;
 	}
-
+	
+	//===============================  SEARCH BY CRIMINAL BY NAME =======================
+	@Override
+	public ArrayList<CriminalDTO> SearchByName(String name) throws SQLException{
+		ArrayList<CriminalDTO> list = new ArrayList<>();
+		try {
+			Connection cn = DBUtil.establishDBConnection();
+			String querry = "SELECT * FROM Criminal WHERE name like ?";
+			PreparedStatement ps = cn.prepareStatement(querry);
+			ps.setString(1,"%"+ name+"%");
+			ResultSet rs = ps.executeQuery();
+			if(!DBUtil.isResultSetEmpty(rs)) {
+				
+				while(rs.next()) {
+				
+					list.add(new CriminalDTOImpl(rs.getInt(1), rs.getString(2), rs.getDate(3).toLocalDate(), rs.getString(4), rs.getString(5),rs.getDate(6).toLocalDate(), rs.getString(7)));
+				}
+			}else {
+				//THROW EXCEPTION HERE RESULT IS EMPLTY
+				//System.out.println("empty");
+			}
+			DBUtil.closeConnection(cn);
+		} catch (SQLException x) {
+			throw new SQLException(x);
+		}
+		
+		return list;
+	}
+	
 }
